@@ -21,9 +21,9 @@ app.get("/", (req, res) => {
 });
 
 //Routes
-app.use(formRoutes);
-app.use(responseRoutes);
-app.use(razorpayRoutes);
+app.use("/form", formRoutes);
+app.use("/response", responseRoutes);
+app.use("/razorpay", razorpayRoutes);
 
 async function startServer() {
     try {
