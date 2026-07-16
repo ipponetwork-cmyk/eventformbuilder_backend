@@ -29,7 +29,7 @@ router.post("/createforms", async (req, res) => {
     const payload = sanitizeCreateFormPayload(req.body);
     const form = new Form(payload);
     await form.save();
-    res.status(201).send(form);
+    res.status(200).send(form);
   } catch (err) {
     if (err && err.code === 11000) {
       return res.status(409).send({ error: 'Duplicate form id. Remove _id for create API.' });
@@ -50,7 +50,7 @@ router.put("/updateforms/:id", async (req, res) => {
   try {
     const form = await Form.findByIdAndUpdate(req.params.id, req.body, { new: true });
     res.json(form);
-  } catch (err) { res.status(500).json({ error: err.message }); }
+  } catch (err) { res.status(500).send({ error: err.message }); }
 });
 
 module.exports = router;
